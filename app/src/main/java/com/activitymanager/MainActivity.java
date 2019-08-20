@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity {
         Log.d(TAG, "01");
         //获得ActivityManager服务的对象
         activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        //
         Log.d(TAG, "getMemoryClass:" + activityManager.getMemoryClass());
         Log.d(TAG, "getLargeMemoryClass:" + activityManager.getLargeMemoryClass());
         Log.d(TAG, "getLockTaskModeState:" + activityManager.getLockTaskModeState());
@@ -108,6 +109,7 @@ public class MainActivity extends BaseActivity {
     /**
      * 03
      * ComponentName类主要用户获取 act对应的信息:包名，类名
+     *
      * @param recentTaskInfo0
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -159,6 +161,10 @@ public class MainActivity extends BaseActivity {
     }
 
     //04
+
+    /**
+     * 获取内存相关信息
+     */
     @SuppressLint("WrongConstant")
     private void initMemoryInfo() {
         Log.d(TAG, "04");
@@ -166,7 +172,7 @@ public class MainActivity extends BaseActivity {
         activityManager.getMemoryInfo(memoryInfo);
         Log.d(TAG, "activityManager--getLargeMemoryClass:" + activityManager.getLargeMemoryClass());
         Log.d(TAG, "activityManager--getMemoryClass:" + activityManager.getMemoryClass());
-        Log.d(TAG, "memoryInfo--availMem:" + (memoryInfo.availMem / 1024 / 1024) + "M");
+        Log.d(TAG, "memoryInfo--availMem:" + (memoryInfo.availMem / 1024 / 1024) + "M");//
         Log.d(TAG, "memoryInfo--totalMem:" + (memoryInfo.totalMem / 1024 / 1024) + "M");
         Log.d(TAG, "memoryInfo--lowMemory:" + memoryInfo.lowMemory);
         Log.d(TAG, "memoryInfo--threshold:" + memoryInfo.threshold);
@@ -175,9 +181,13 @@ public class MainActivity extends BaseActivity {
 
 
     //05
+
+    /**
+     * 获取当前运行的task,可用于判断：栈顶的运行信息，
+     */
     private void initRunningTaskInfo() {
         Log.d(TAG, "05");
-        Log.d(TAG, "RunningTaskInfo集合：" + activityManager.getRunningTasks(10).size());
+        Log.d(TAG, "RunningTaskInfo集合：" + activityManager.getRunningTasks(10).size());//
 
         for (ActivityManager.RunningTaskInfo runningTaskInfo : activityManager.getRunningTasks(10)) {
             this.runningTaskInfo = runningTaskInfo;
@@ -205,7 +215,19 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 获取RecentTaskInfo，用于判断app是否在前台
+     */
+    private void initRecentTaskInfo() {
+
+
+    }
+
     //06
+
+    /**
+     * 可用于判断程序是否前后台
+     */
     @SuppressLint("WrongConstant")
     private void initRunningAppProcessInfo() {
         Log.d(TAG, "06");
